@@ -1,4 +1,5 @@
 # Github로
+- add commit 후 버전을 올리는 것이 Github다.
 
 ## push
 
@@ -12,18 +13,18 @@ $ git remote add origin <URL>
 - $ git push <원격저장소이름><브랜치이름>
   원격 저장소는 로컬 폴더의 파일/폴더가 아닌 저장소의 `버전(커밋)`을 관리하는 것
 
-1. 작성한 파일 add
+#### 1. 작성한 파일 add
 ```bush
 $ git add 28git.md
 ```
-2. commit
+#### 2. commit
 ```bush
 $ git commit -m '28git'
 [master 50f9627] 28git
  1 file changed, 72 insertions(+)
  create mode 100644 28git.md
 ```
-3. push
+#### 3. push
 ```bush
 $ git push origin master
 Enumerating objects: 4, done.
@@ -44,6 +45,7 @@ To https://github.com/dnjsxo0616/TIL.git
  원격 저장소로부터 변경된 내역을 받아와서 이력을 병합함
 ---
 ## clone
+- 저장소 자체를 가져오는 행위이다.
 
 ### 원격저장소 프로젝트를 시작하고 싶을 때 `clone`
 - & git clone <원격저장소 주소>
@@ -64,12 +66,15 @@ Receiving objects: 100% (4/4), done.
 .gitignore
 ```
 - Git 저장소에 .gitignore파일을 생성한 후 상관없는 파일을 관리한다.
+- 확장자가 같은 파일이 많으면 ex) pptx 라면 *.pptx라고 하면 모든 pptx를 무시 가능
 
   **주의** 이미 커밋된 파일은 반드시 삭제를 해야지 적용된다.
 ---
 - `clone`과 `pull`의 차이점은?
 clone : 원격저장소 복제
 pull : 원격저장소 커밋 가져오기
+
+Git log를 했을 때 : 은 길어서 그런 건데 q(quit)를 누르면 된다.
 
 ## 명령어 정리
 ```bush
