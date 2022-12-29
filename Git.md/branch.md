@@ -49,7 +49,7 @@ $ git init
 
    * master 브랜치에서 {브랜치명}을 병합
 
-   ## 2. branch 병합 시나리오
+   ## 2. branch 병합 시나리오 
 
    > branch 관련된 명령어는 간단하다.
    >
