@@ -32,6 +32,7 @@ while len(queue) > 1:
   print(queue.pop(0), end = ' ')
   queue.append(queue.pop(0))
 print(queue[0])
+>>> pop(0)은 비효율적이다.
 ```
 
 ## 큐의 맨 앞 데이터를 가져오는 행위
@@ -98,8 +99,11 @@ print(d) # deque([1, 2, 3, 4, 5, 6, 7, 8, 9])
 print(list(d)) # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-- ==`양 방향`으로 삽입과 삭제가 자유로운 큐
+## :bulb: 큐(queue)말고 덱(deque)을 사용하는 이유
+
+- `덱(deque)`은==`양 방향`으로 삽입과 삭제가 자유로운 큐
 appendleft() -> [1, 2, 3, 4] <- append()
 popleft() ->                 -> pop()
 
 - 따라서 데이터의 삽입 추출이 많은 경우, 시간을 단축 시킬 수 있다.
+
