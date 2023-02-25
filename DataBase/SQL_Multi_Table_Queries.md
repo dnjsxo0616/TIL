@@ -88,6 +88,15 @@ RIGHT JOIN users
   ON articles.userId = users.id;
 ```
 
+# 두 개의 테이블 모두 JOIN할 때
+```
+SELECT * FROM tableA
+LEFT JOIN tableB ON tableA.fk = tableB.id
+UNION
+SELECT * FROM tableA
+RIGHT JOIN tableB ON tableA.fk = tableB.id; 
+```
+
 # 3개 이상의 테이블을 JOIN할 때
 ```
 >> 방법 1
@@ -104,4 +113,4 @@ FROM     PLAYER P, TEAM T, STADIUM S
 WHERE    P.TEAM_ID = T.TEAM_ID
 AND      T.STADIUM_ID = S.STADIUM_ID
 ORDER BY 선수명 ; 
-```
+>>
