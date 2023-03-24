@@ -64,14 +64,14 @@ bool = models.BooleanField(initial=True, **options)
 ## :star: 필드 옵션
 - 각 모델마다 따로 필요한 옵션도 있지만, 공통적으로 가지고 있고 주로 쓰는 옵션이 있다.
 - 보통 필수 항목을 제외하면 blank 옵션이나 null을 활성화 시켜놓는다. 또 해당 필드가 DB내에서 중요한 Key 역할을 하게 될 경우, 관련 옵션을 사용하면 유용할 것이다.
-![Field_option](Field_option.png)
+![Field_option](./image/Field_option.png)
 
 # 2. Migrations
 
 - model 클래스의 변경사항(필드 생성, 추가 수정 등)을 DB에 최종 반영하는 방법
 
 ## Migrations 과정
-![process](migrations.png)
+![process](./image/migrations.png)
 
 ## Migrations 핵심 명령어
 
@@ -86,10 +86,10 @@ python manage.py migrate
 - migrate 후 DB 내에 생성된 테이블을 확인할 수 있다.
 
 ## 이미 생성된 테이블에 필드를 추가해야 한다면:question:
-![add](add1.png)
-![add](add2.png)
-![add](add3.png)
-![add](add4.png)
+![add](./image/add1.png)
+![add](./image/add2.png)
+![add](./image/add3.png)
+![add](./image/add4.png)
 
 ## :star: model class에 변경사항이 생겼다면, 반드시 설계도를 생성하고, 이를 DB에 반영해야한다.
 
@@ -146,4 +146,4 @@ $ python manage.py sqlmigrate articles 0001
 - 해당 migrations 파일이 SQL문으로 어떻게 해석되어 DB에 전달되는지 확인한는 용도
 
 ## 첫 migrate 시 출력 내용이 많은 이유는?
-![r](re.png)
+![r](./image/re.png)
