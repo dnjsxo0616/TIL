@@ -94,3 +94,104 @@ $ pip freeze > requirements.txt
 >>> Article.objects.all()
 <QuerySet [Article: Article object (1)]>
 ```
+
+### - 첫 번째 방법 (3/3)
+```python
+# 인스턴스인 article을 활용하여 변수에 접근해보자(데이터 저장된 것을 확인)
+>>> article.title
+'first'
+>>> article.content
+'django!'
+>>> article.created_at
+datetime.datetime(2023, 1, 1, 2, 43, 56, 49345, tzinfo=<UTC>)
+```
+
+### - 두 번 째 방법
+```python
+>>> article = Article(title='second', content='django!')
+
+# 아직 저장되어있지 않음
+>>> article
+<Article: Article object (None)>
+
+# save를 호출해야 저장됨
+>>> article.save()
+>>> article
+<Article: Article object (2)>
+>>> Article.objects.all()
+<QuerySet [<Article: Article object (1)>, <Article: Article object (2)>]>
+
+# 값 확인
+>>> article.pk
+2
+>> article.title
+'second'
+>>> article.content
+'django!'
+```
+
+### - 세 번째 방법
+- QuerySet API 중 create() 메서드 활용
+```python
+# 위 2가지 방식과는 다르게 바로 생성된 데이터가 반환된다.
+>>> Article.objects.create(title='third', content='django!')
+<Article: Article object (3)>
+```
+
+## save()
+- 객체를 데이터베이스에 저장하는 메서드
+
+# 4. ORM READ
+
+## 전체 데이터 조회
+- `all() 메서드`
+```python
+>>> Article.objects.all()
+<QuerySet [<Article: Article object (1)>, <Article: Article object (2)>, <Article: Article object (3)>]>
+```
+
+## 단일 데이터 조회
+- `get() 메서드`
+```python
+>>> Article.objects.get(pk=1)
+<Article: Article object (1)>
+
+>>> Article.objects.get(pk=100)
+DoesNotExist: Article matching query does not exist.
+
+>>> Article.objects.get(content='django!')
+MultipleObjectsReturned: get() returned more than one Article -- it returned 2!
+```
+
+## get()
+- 객체를 찾을 수 없으면 DoesNotExist 예외를 발생시키고,
+- 둘 이상의 객체를 찾으면 MultipleObjectsReturned 예외를 발생시킴
+- 위와 같은 특징을 가지고 있기 때문에 primary key와 같이 고유성(uniqueness)을 보장하는 조회에서 사용해야 함
+
+## 특정 조건 데이터 조회
+- `filter() 메서드`
+```python
+>>> Article.objects.filter(content='django!')
+<QuerySet [<Article: Article object (1)>, <Article: Article object (2)>, <Article: Article object (3)>]>
+>>> Article.objects.filter(title='a')
+<QuerySet []>
+>>> Article.objects.filter(title='first')
+<QuerySet [<Article: Article object (1)>]>
+```
+
+# 참고
+
+## Field lookups
+- 특정 레코드에 대한 조건을 설정하는 방법
+- QuerySet 메서드 filter(), exclude() 및 get()에 대한 키워드 인자로 지정됨
+```python
+# Field lookups 예시
+
+# "content 컬럼에 'dj'가 포함된 모든 데이터 조회"
+>>> __contains
+Article.objects.filter(content__contains='dj')
+```
+
+## ORM, QuerySet API를 사용하는 이유
+- 데이터베이스 쿼리를 추상화하여 Django 개발자가 데이터베이스와 직접 상호작용하지 않아도 되도록 함
+- 데이터베이스와의 결합도를 낮추고 개발자가 더욱 직관적이고 생산적으로 개발할 수 있도록 도움
