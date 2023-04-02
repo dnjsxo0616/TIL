@@ -144,8 +144,9 @@ render(request, template_name, context)
 >> 주어진 템플릿을 주어진 컨텍스트 데이터와 결합하고
 >> 렌더링 된 텍스트와 함께 HttpResponse(응답) 객체를 반환하는 함수
 ```
-1. request
-  - 응답을 생성하는 데 사용되는 요청 객체
+1. request :star:
+  - 응답을 생성하는 데 사용되는 요청 객체 (요청객체가 요청 -> urls.py -> views.py 전달이 된다. 함수는 이 요청 객체를 함수의 인자로 받는다.(request라는 이름의 기본인자))
+  - 사용자가 요청한 모든 데이터를 가지고 있다.
 
 2. template_name
   - 템플릿 이름의 경로
