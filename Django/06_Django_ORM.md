@@ -11,7 +11,7 @@
 - objects : Manager
 - all() : Queryset API
 
-![Quertset_API](/image/Queryset_API.png)
+![Quertset_API](./image/Queryset_API.png)
 
 ## Query
 - 데이터베이스에 특정한 데이터를 보여달라는 요청
