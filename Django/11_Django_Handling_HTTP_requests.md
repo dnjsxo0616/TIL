@@ -82,7 +82,7 @@ urlpatterns = [
 ## 기존 new 관련 코드 수정
 ![new1](./image/newcode1.png)
 
-![new2](/image/newcode2.png)
+![new2](./image/newcode2.png)
 
 ## :star:
 
@@ -126,4 +126,4 @@ urlpatterns = [
 ```
 
 ## 기존 edit 관련 코드 수정
-![editcode](/image/editcode.png)
+![editcode](./image/editcode.png)
