@@ -407,3 +407,38 @@ def comment_delete(request, article_pk, comment_pk):
   {% endfor %}
 </ul>
 ```
+
+# 참조
+
+## 댓글 개수 출력하기
+
+1. DTL filter-length 사용
+```python
+{{ comments|length }}
+{{ article.comment_set.all|length }}
+```
+
+2. QuerysetAPI - count() 사용
+```python
+{{ article.comment_set.count}}
+```
+
+## 댓글이 없는 경우 대체 컨텐츠 출력
+- DTL tag - for empty 사용
+
+![commentnone](./image/commentnone.png)
+
+## 댓글 수정을 구현하지 않은 이유
+- 일반적으로 댓글 수정은 수정 페이지로 이동 없이 현재 페이지가 유지된 상태로 댓글 작성 Form 부분만 변경되어 수정할 수 있도록 함
+- 이처럼 페이지의 일부 내용만 업데이트 하는 것은 JavaScript의 영역이기 때문에 JavaScript를 사용해 도전해 볼 수 있도록 함
+
+## admin site 등록
+- admin site에서 보기 위해 등록
+- 새로 작성한 Comment 모델을 admin site에 등록하기
+```python
+# articles/admin.py
+from .models import Article, comment
+
+admin.site.register(Article)
+admin.site.register(Comment)
+```

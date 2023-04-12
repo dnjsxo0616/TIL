@@ -45,7 +45,7 @@ class User(AbstractUser):
 
 ```python
 # setting.py
-AUTH_USER_MODEL = 'accounts,User'
+AUTH_USER_MODEL = 'accounts.User'
 ```
 ### 3. 순서
 - 기본 User 모델이 아니기 때문에 `등록하지 않으면 admin site에 출력되지 않는다.`

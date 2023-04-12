@@ -65,6 +65,14 @@ def signup(request):
   return render(request, 'accounts/signup.html', context)
 ```
 
+## :bulb: 회원가입 진행 후 에러 페이지 확인 :heavy_exclamation_mark:
+
+![signuperror1](./image/signuperror.png)
+
+### :star: 회원가입에 사용하는 UserCreationForm이 우리가 대체한 커스템 유저 모델이 아닌 기존 유저 모델로 인해 작성된 클래스이기 때문이다.
+
+![signuperror2](./image/signuperror2.png)
+
 ## 2-4 커스텀 유저 모델을 사용하려면 다시 작성해야 하는 forms
 ### UserCreationForm / UserChangeForm
 - 두 form 모두 class Meta: model=User가 등록된 form이기 때문
@@ -271,12 +279,6 @@ def change_password(request):
 
 ## 5-5 비밀번호 변경 로직 작성
 ```python
-# accounts/views.py
-from django.contrib.auth.forms import PasswordChangeForm
-
-def change_password(request):
-  if request.method === 'POST':
-    ```python
 # accounts/views.py
 from django.contrib.auth.forms import PasswordChangeForm
 
