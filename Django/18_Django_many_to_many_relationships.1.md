@@ -49,8 +49,7 @@ patient3 = Patient.objects.create(name='carol', doctor=doctor2)
 
 ## 1-2 중개 모델
 
-### 1
-- 환자 모델의 외래 키를 삭제하고 별도의 예약 모델을 새로 작성
+### 1. 환자 모델의 외래 키를 삭제하고 별도의 예약 모델을 새로 작성
 - 예약 모델은 의사와 환자에 각각 N:1 관계를 가진다.
 
 ```python
@@ -82,8 +81,7 @@ class Reservation(models.Model):
 
 ![reservationmodel](./image/reservationmodel.png)
 
-### 2
-- 데이터 베이스 초기화 후 Migration 진행 및 shell_plus 실행
+### 2. 데이터 베이스 초기화 후 Migration 진행 및 shell_plus 실행
 - 의사와 환자 생성 후 예약 만들기
 ```python
 doctor1 = Doctor.objects.create(name='alice')
@@ -125,8 +123,7 @@ class Patient(models.Model):
 # Reservation Class 주석 처리
 ```
 
-### 2
-- 데이터 베이스 초기화 후 Migration 진행 및 shell_plus 실행
+### 2. 데이터 베이스 초기화 후 Migration 진행 및 shell_plus 실행
 - 생성된 중개 테이블 hospitals_patient_doctors 확인
 
 ![manyto1](./image/manyto1.png)
@@ -322,12 +319,39 @@ urlpatterns = [
 ```python
 # articles/views.py
 
-@login_required
-def delete(request, artilce_pk):
-    article = Article.objects.get(pk=artilce_pk)
-    if request.user == article.user:
-        article.delete()
-    return redirect('articles:index')
+def likes(request, article_pk):
+  # 좋아요를 누르는 대상 게시글
+  article = Article.objects.get(pk=article_pk)
+
+  # 좋아요 관계를 추가 or 삭제
+  # case 1. 현재 좋아요를 요청하는 유저가 해당 게시글의 좋아요를 누른 유저 목록에 있는지 없는지를 확인
+  if request.user in article.like_users.all():
+  
+  # case 2. 해당 게시글의 좋아요를 누른 유저에서 현재 요청하는 유저의 존재를 조회
+  # if article.like_users.filter(pk=request.user.pk).exists(): # 좋아요를 누른 목록이 엄청 커지면 in 연산자가 검색을 하는데 느려질 때 이걸 사용 (존재 여부 확인하는 것에서는 exists가 좀 더 권장)
+
+      # 좋아요 취소
+      article.like_users.remove(request.user) # 참조
+      # # 좋아요 취소 유저 기준으로 역 참조
+      # request.user.like_articles.remove(article)
+  else:
+      # 좋아요 추가
+      article.like_users.add(request.user) # 참조
+      # # 좋아요 취소 유저 기준으로 역 참조
+      # request.user.like_articles.add(article) # 역참조
+  return redirect('articles:index')
+
+
+  # 좋아요 관계를 추가 or 삭제
+  # 한 번 누르면 추가, 두 번 누르면 삭제 -> 그럼 세 번째부터는...?
+  # 체크박스? 좋아요를 누를 때 체크박스를 사용하지 않는다...
+  # 게스글에 좋아요를 누른 모든 유저를 조회할 수 있다. 위에 article = Article.objects.get(pk=article_pk)가 있기 때문에
+
+  # article.like_users.all()
+  # 지금 좋아요를 요청하는 유저가 저 유저 목록에 있는지 없는지
+  
+  # 목록에 있으면? => 좋아요 취소
+  # 해당 목록에 없으면? => 좋아요 추가
 ```
 
 ### 3-5-2 index 템플릿에서 각 게시글에 좋아요 버튼 출력
