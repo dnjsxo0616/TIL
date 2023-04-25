@@ -85,3 +85,27 @@ $ python manage.py loaddata users.json
 $ python manage.py loaddata articles.json
 $ python manage.py loaddata comments.json
 ```
+
+# 참고
+
+## 모든 모델을 한 번에 dump 하기
+```python
+# 3개의 모델을 하나의 json 파일로
+$ python manage.py dumpdata --indent 4 articles.articles.coment accounts.user > data.json
+
+# 모든 모델을 하나의 json 파일로
+$ python manage.py dumpdata --indent 4 > data.json
+```
+
+## loaddata 시 encoding codec 관련 에러가 발생하는 경우
+- 2가지 방법 중 택 1
+
+1. dumpdata 시 추가 옵션 작성
+```python
+$ python -Xutf8 manage.py dumpdata [생략]
+```
+
+2. 메모장 활용
+  1. 메모장으로 json 파일 열기
+  2. "다른 이름으로 저장" 클릭
+  3. 인코딩을 UTF8로 선택 후 저장
